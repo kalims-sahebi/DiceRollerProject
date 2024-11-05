@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class GradientContainer extends StatelessWidget {
   //const GradientContainer({key}) : super(key: key);
-  const GradientContainer(this.colors, {super.key});
-  final List<Color> colors;
-  //final Color color1;
-  //final Color color2;
+  GradientContainer(this.color1, this.color2, {super.key});
+  GradientContainer.purplered({super.key})
+      : color1 = const Color.fromARGB(255, 216, 12, 26),
+        color2 = const Color.fromARGB(255, 154, 32, 224);
 
-  void rollDice() {}
+  final Color color1;
+  final Color color2;
+  var activeDice = 'assets/images/dice-5.png';
+  void rollDice() {
+    activeDice = 'assets/images/dice-3.png';
+    //print('Changing ...');
+  }
+
   @override
   Widget build(context) {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: colors,
+          colors: [color1, color2],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -24,7 +32,7 @@ class GradientContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              'assets/images/dice-5.png',
+              activeDice,
               width: 200,
             ),
             const SizedBox(
